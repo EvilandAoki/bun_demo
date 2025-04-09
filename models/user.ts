@@ -68,3 +68,18 @@ export const findUserbyEmail = (email: string): User | undefined => {
 export const validatePassword = async (user: User, password: string): Promise<boolean> => {
     return compare(password, user.password)
 }
+
+/**
+ * revoque Token
+ * @param {string} email - The email of the user to remove the token.
+ * @return {boolean} - true if the token is revoked, otherwise false.
+ */
+
+export const revokeUserToken = (email: string): boolean => {
+    const foundUser = users.get(email)
+    if (!foundUser) {
+        return false
+    }
+    users.set(email, { ...foundUser, refreshtoken: undefined })
+    return true
+}
