@@ -18,7 +18,7 @@ export const authSchema = object({
 export type User = InferInput<typeof authSchema> & {
     id: number;
     role: Role,
-    refreshtoken?: string
+    refreshToken?: string
 }
 
 const users: Map<string, User> = new Map();
@@ -80,6 +80,6 @@ export const revokeUserToken = (email: string): boolean => {
     if (!foundUser) {
         return false
     }
-    users.set(email, { ...foundUser, refreshtoken: undefined })
+    users.set(email, { ...foundUser, refreshToken: undefined })
     return true
 }
